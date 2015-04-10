@@ -5,7 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
 <script src="bootstrap.js"></script>
-<script src="app.js"></script>
+<!-- <script src="app.js"></script> -->
 <script type="text/javascript" src="jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="styles.css"></style>
 <link rel="stylesheet" type="text/css" href="bootstrap.min.css"></style>
@@ -17,7 +17,7 @@
 <body ng-controller="MainCtrl as ctrl">
 
 
-<div class="content">
+<div class="content" ng-view>
     
 
   <div class="article-form-container">
@@ -31,32 +31,34 @@
         <div class="panel-body">
           <input required placeholder="buyer" ng-model="adding_note.buyer"></input>
           <input class="title" type="text" required placeholder="image url" size="30" ng-model="adding_note.imageurl" />
-            {{adding_portfolio.imageurl}}
+            {{adding_note.imageurl}}
           </div>
-          <input class="btn btn-success" type="submit" value="Contribute" />
+          <input ng-click="addNote(adding_pote)" class="btn btn-success" type="submit" value="Contribute" />
       </div>
       </form>
     </div>
   </div>
 </div>
 
-      <article ng-repeat-start="note in ctrl.notes" class="article-form-container portfolio-item group first panel panel-default">
+      <article ng-repeat="note in ctrl.notes" class="article-form-container portfolio-item group first panel panel-default">
           <header class="portfolio-info">
-      <div class="title">{{note.label}}</div>
+            <table><td>
+      <div class="title">{{note.development}}</div>
     <span> Who Sold It? {{note.seller}}</div>
     <div> Who Bought It? {{note.buyer}}</div>
     <div>Year of Sale: {{note.year}}</div>
       <div id="numbers">Price: $ {{note.revenue}}</div>
       <div>Proposed height of the tower: {{note.height}} stories</div>
-    </header>
-    <figure class="note-image">
+    </header></td><td>
+    <figure class="img-thumbnail">
       <img class="ng-cloak" ng-src="{{ note.imageurl }}" alt="{{ note.title }}">
-    </figure>
+    </figure></td>
+  </table>
     </article>
     </div>
   </div>
 
- <div ng-repeat-end>
+
 
 
 
@@ -67,10 +69,13 @@ angular.module('notesApp', [])
 .controller('MainCtrl', [function() {
   var self = this;
   self.notes = [
+
   {
     id: 1,
-    label : '432 park avenue',
+    development : '432 park avenue',
     revenue : 418300000,
+    height: '89',
+    imageurl: '432_park_avenue.jpg',
     seller : 'Host Marriott Corporation',
     year : 2004
   },
@@ -78,8 +83,9 @@ angular.module('notesApp', [])
   {
     id: 2,
     buyer: 'Hines, Goldman Sachs and Pontiac Land Group',
-    label: '53W53',
+    development: '53W53',
     height: '82',
+    imageurl : '53_West_53rd_street.jpg',
     revenue : 71000000,
     seller : 'St Thomas Church',
     year : 2014
@@ -90,6 +96,7 @@ angular.module('notesApp', [])
     buyer : 'Alchemy Properties Inc',
     coords : '@40.772008,-73.955692,17',
     development : 'Isis Condominium',
+    imageurl: 'Isis.jpg',
     height : 18,
     seller : 'Adjacent tenement buildings'
   },
@@ -97,6 +104,7 @@ angular.module('notesApp', [])
     id: 4,
     // coords : @40.765388,-73.979147,17z,
     development : 'One57',
+    imageurl: 'One57-tower.jpg',
     height : 90,
     seller : '140 West 58th Street'
   }, 
@@ -105,7 +113,10 @@ angular.module('notesApp', [])
     // coords : @40.752579,-73.967524,17,
     development : 'The Trump World Tower',
     height : 72,
-    seller : '140 West 58th Street'}
+    year: 1999,
+    imageurl: 'Trump_World_Tower_and_East_River_in_Manhattan,_New_York_City.jpg',
+    seller : '140 West 58th Street'
+  }
     ];
   }]);
 </script>

@@ -1,4 +1,9 @@
 
+body
+{
+	background-image: -webkit-linear-gradient(top, #808080, #999966);
+}
+
 .content
 {
 	margin-left: 20%;
@@ -9,4 +14,10 @@
 {
 	margin-left: 20%;
 	margin-right: 20%;
+}
+
+td img
+{
+	width: 250px;
+
 }
